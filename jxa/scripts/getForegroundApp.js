@@ -13,6 +13,15 @@ const getAppInfo = ({ app, name }) => {
       title: app.documents[0].name(),
       url: app.documents[0].url(),
     }
+  } else if (name === 'iTunes') {
+    const { currentTrack } = app
+    info.currentTrack = {
+      title: currentTrack.name(),
+      artist: currentTrack.artist(),
+      album: currentTrack.album(),
+      duration: currentTrack.duration(),
+      position: app.playerPosition(),
+    }
   }
 
   return info

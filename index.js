@@ -1,19 +1,13 @@
 const log = (...args) => console.log(...args)
 const {
-  getForegroundApp,
-  getCurrentItunesTrack,
-  getTabsForAllBrowsers,
-} = require('./jxa')
+  FOREGROUND_APP,
+} = require('./events')
 
-const run = async () => {
-  log(await getForegroundApp())
-  log(await getCurrentItunesTrack())
-  log(await getTabsForAllBrowsers())
-}
-
-setInterval(() => {
-  run().catch(console.error)
-}, 1000)
+const monitor = require('./monitor')()
+monitor.monitorForegroundApp()
+monitor.on(FOREGROUND_APP, e => {
+  console.log(e)
+})
 
 // const { EventEmiter } = require('events')
 // const sys = require('systeminformation')
