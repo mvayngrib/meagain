@@ -14,7 +14,7 @@ const flatten = arr => [].concat.apply([], arr)
 const getTabsForAllBrowsers = () => getTabsForBrowsers(ALL_BROWSERS)
 const getTabsForBrowsers = async (browsers) => {
   try {
-    const tabs = await Promise.all(browsers.map(browser => getBrowserTabs(browser)))
+    const tabs = await Promise.all(browsers.map(getBrowserTabs))
     return flatten(tabs)
   } catch (err) {
     logger.error(err.stack)
