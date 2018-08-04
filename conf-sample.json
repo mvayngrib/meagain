@@ -1,0 +1,12 @@
+{
+  "monitor": {
+    "interval": 1000
+  },
+  "store": {
+    "s3": {
+      "profile": "aws-profile-name",
+      "bucket": "my-private-bucket",
+      "prefix": "lifelog/silly-macbook"
+    }
+  }
+}
