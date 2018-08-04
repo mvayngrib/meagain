@@ -1,3 +1,5 @@
+/* global Application */
+
 const app = Application('iTunes')
 const { currentTrack } = app
 JSON.stringify({

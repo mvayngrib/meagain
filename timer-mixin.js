@@ -24,7 +24,7 @@ exports.create = () => {
     all[setMethod] = (...args) => {
       const ref = set(...args)
       cache[type].push({ args, ref })
-      const [fn, delay, ...params] = args
+      const [fn, /* delay*/, ...params] = args
       setImmediate(fn, ...params)
       return ref
     }
@@ -34,7 +34,7 @@ exports.create = () => {
     }
 
     all[`${clearMethod}s`] = () => {
-      cache[type].slice().forEach(item => all[clearMethod](item.ref))
+      cache[type].slice().forEach(item => clear(item.ref))
     }
 
     return all

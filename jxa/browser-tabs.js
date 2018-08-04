@@ -1,4 +1,5 @@
 const _getBrowserTabs = require('get-browser-tabs')
+const logger = require('../utils').createLogger()
 const DEFAULT_BROWSER = 'chrome'
 const ALL_BROWSERS = [
   'chrome',
@@ -16,7 +17,7 @@ const getTabsForBrowsers = async (browsers) => {
     const tabs = await Promise.all(browsers.map(browser => getBrowserTabs(browser)))
     return flatten(tabs)
   } catch (err) {
-    console.error(err.message)
+    logger.error(err.stack)
     return []
   }
 }
@@ -31,8 +32,6 @@ const getBrowserTabs = async (browser=DEFAULT_BROWSER) => {
   } catch (err) {
     return []
   }
-
-  return perBrowser
 }
 
 module.exports = {

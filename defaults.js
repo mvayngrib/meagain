@@ -1,6 +1,6 @@
 
 const monitor = {
-  idleThreshold: 2000,
+  idleThreshold: 12000,
   interval: 1000,
 }
 

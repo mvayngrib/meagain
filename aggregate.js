@@ -1,21 +1,39 @@
 const cloneDeep = require('lodash/cloneDeep')
 
-const trackTimePerApp = ee => {
+const createAggregate = () => ({
+  time: 0
+})
+
+const trackTimePerApp = changes => {
   const tracker = {}
-  const aggregate = {}
-  ee.on('**:end', function (data) {
-    const { app, type } = data
-    if (!aggregate[app]) {
-      aggregate[app] = {
-        time: 0
-      }
+  const aggregates = {}
+  const addEvent = (aggregates, data) => {
+    const { app } = data
+    if (!aggregates[app]) {
+      aggregates[app] = createAggregate()
     }
 
-    const agg = aggregate[app]
-    agg.time += data._end - data._start
-  })
+    const agg = aggregates[app]
+    const {
+      _start,
+      _end=Date.now(),
+    } = data
 
-  tracker.summary = () => cloneDeep(aggregate)
+    agg.time += _end - _start
+  }
+
+  changes.on('**:end', data => addEvent(aggregates, data))
+
+  tracker.summary = () => {
+    const dump = cloneDeep(aggregates)
+    const current = changes.getCurrentEvent()
+    if (current) {
+      addEvent(dump, current)
+    }
+
+    return dump
+  }
+
   return tracker
 }
 

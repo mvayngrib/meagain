@@ -1,4 +1,3 @@
-const withDefaults = require('lodash/defaults')
 const createEmitter = require('./emitter')
 const timerMixin = require('./timer-mixin')
 const {
@@ -10,17 +9,11 @@ const {
   FOREGROUND_APP
 } = require('./events')
 
-const defaults = require('./defaults')
-
 const {
   getForegroundApp,
-  getCurrentItunesTrack,
-  getTabsForAllBrowsers,
 } = require('./jxa')
 
-const createMonitor = (opts={}) => {
-  opts = withDefaults(defaults.monitor)
-
+const createMonitor = opts => {
   const { interval, idleThreshold } = opts
   const logger = createLogger()
   const ee = createEmitter()
@@ -32,8 +25,8 @@ const createMonitor = (opts={}) => {
     const now = Date.now()
     if (isIdle(idleThreshold)) {
       ee.emit(FOREGROUND_APP, {
-        app: '[idle]',
-        type: 'system',
+        app: 'system',
+        type: 'idle',
         _start: now,
       })
 
@@ -52,6 +45,7 @@ const createMonitor = (opts={}) => {
   }
 
   // external
+  ee.interval = interval
   ee.monitorForegroundApp = () => ee.setInterval(checkForegroundApp, interval)
   ee.stop = () => ee.clearTimers()
 
