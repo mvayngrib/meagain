@@ -1,4 +1,6 @@
+const os = require('os')
 const crypto = require('crypto')
+const yn = require('yn')
 
 const prettify = obj => obj ? JSON.stringify(obj, null, 2) : ''
 const prettifyArgs = args => args.length === 1 ? prettify(args[0]) : prettify(args)
@@ -106,6 +108,13 @@ const humanizeTime = time => Object.keys(unitToMillis).reduce((str, unit) => {
   return str.length ? `${str}, ${added}` : added
 }, '')
 
+const parseEnvVars = ({ CONF_PATH, SILENT }) => ({
+  silent: yn(SILENT),
+  confPath: CONF_PATH,
+})
+
+const getHomedir = () => process.env.HOME || os.homedir()
+
 module.exports = {
   prettify,
   prettifySummary,
@@ -113,4 +122,6 @@ module.exports = {
   getEventKey,
   describeDate,
   humanizeTime,
+  parseEnvVars,
+  getHomedir,
 }

@@ -3,7 +3,7 @@ const { createLogger, prettifySummary } = require('./utils')
 const { trackTimePerApp } = require('./aggregate')
 const filters = require('./filters')
 
-const trackMe = ({ store, monitor }) => {
+const trackMe = ({ store, monitor, silent }) => {
   const logger = createLogger()
   monitor.monitorForegroundApp()
   const changes = filters.changes(monitor)
@@ -20,7 +20,9 @@ activity summary for the last ${getMinutesPassed()} minutes:
 ${activitySummary}`)
   }
 
-  setInterval(printSummary, monitor.interval)
+  if (!silent) {
+    setInterval(printSummary, monitor.interval)
+  }
 
   if (!store) return
 

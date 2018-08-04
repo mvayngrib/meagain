@@ -21,3 +21,11 @@ npm i -g trackme
 ### Module
 
 See [cmd.js](./cmd.js)
+
+### Todo
+
+support data queries:
+  - get activity breakdown during a time period (today, this month)
+  - search content of visited browser pages (later)
+  - handle process exit (e.g. machine shutdown). Run as service
+  - maybe first write to local buffer, then sync to s3
