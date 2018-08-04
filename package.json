@@ -16,7 +16,8 @@
     "changes-feed": "^1.1.0",
     "eventemitter2": "^5.0.1",
     "lodash": "^4.17.10",
-    "log-update": "^2.3.0"
+    "log-update": "^2.3.0",
+    "screenshot-desktop": "^1.4.3"
   },
   "optionalDependencies": {
     "aws-sdk": "^2.286.2"

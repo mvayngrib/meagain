@@ -1,5 +1,11 @@
+const os = require('os')
+if (os.platform() !== 'darwin') {
+  throw new Error('only OSX is currently supported')
+}
+
 const fs = require('fs')
 const path = require('path')
+const system = require('./system/darwin')
 const createMonitor = require('./monitor')
 const withDefaults = require('lodash/defaults')
 const defaults = require('./defaults')
@@ -35,5 +41,8 @@ const { trackMe } = require('./')
 
 trackMe({
   store,
-  monitor: createMonitor(withDefaults(conf.monitor, defaults.monitor)),
+  monitor: createMonitor({
+    ...withDefaults(conf.monitor, defaults.monitor),
+    system,
+  }),
 })

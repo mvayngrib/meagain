@@ -1,6 +1,4 @@
 const crypto = require('crypto')
-const { IDLE_THRESHOLD } = require('./defaults')
-const systemIdleTime = require('@paulcbetts/system-idle-time')
 
 const prettify = obj => obj ? JSON.stringify(obj, null, 2) : ''
 const prettifyArgs = args => args.length === 1 ? prettify(args[0]) : prettify(args)
@@ -18,8 +16,6 @@ const createLogger = () => ({
 })
 /* eslint-enable */
 
-const getIdleTime = () => systemIdleTime.getIdleTime()
-const isIdle = (threshold=IDLE_THRESHOLD) => getIdleTime() > threshold
 const leftPad = (value, length) => {
   value = String(value)
   if (value.length < length) {
@@ -114,8 +110,6 @@ module.exports = {
   prettify,
   prettifySummary,
   createLogger,
-  getIdleTime,
-  isIdle,
   getEventKey,
   describeDate,
   humanizeTime,

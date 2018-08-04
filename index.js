@@ -16,6 +16,7 @@ const trackMe = ({ store, monitor }) => {
 polling interval: ${monitor.interval}ms
 storing events: ${store || false}
 activity summary for the last ${getMinutesPassed()} minutes:
+
 ${activitySummary}`)
   }
 

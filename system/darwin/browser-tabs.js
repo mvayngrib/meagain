@@ -1,5 +1,5 @@
 const _getBrowserTabs = require('get-browser-tabs')
-const logger = require('../utils').createLogger()
+const logger = require('../../utils').createLogger()
 const DEFAULT_BROWSER = 'chrome'
 const ALL_BROWSERS = [
   'chrome',

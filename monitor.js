@@ -2,19 +2,14 @@ const createEmitter = require('./emitter')
 const timerMixin = require('./timer-mixin')
 const {
   createLogger,
-  isIdle,
 } = require('./utils')
 
 const {
   FOREGROUND_APP
 } = require('./events')
 
-const {
-  getForegroundApp,
-} = require('./jxa')
-
 const createMonitor = opts => {
-  const { interval, idleThreshold } = opts
+  const { system, interval, idleThreshold } = opts
   const logger = createLogger()
   const ee = createEmitter()
 
@@ -23,7 +18,7 @@ const createMonitor = opts => {
   // internal
   const checkForegroundApp = async () => {
     const now = Date.now()
-    if (isIdle(idleThreshold)) {
+    if (system.isIdle(idleThreshold)) {
       ee.emit(FOREGROUND_APP, {
         app: 'system',
         type: 'idle',
@@ -34,7 +29,7 @@ const createMonitor = opts => {
     }
 
     try {
-      const event = await getForegroundApp()
+      const event = await system.getForegroundApp()
       ee.emit(FOREGROUND_APP, {
         ...event,
         _start: now,
