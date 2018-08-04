@@ -15,11 +15,16 @@ const changes = (monitor, hasChanged=defaultHasChanged) => {
       if (prev != null) {
         ee.emit(`${event}:end`, {
           ...prev,
+          event,
           _end: Date.now(),
         })
       }
 
-      ee.emit(`${event}:start`, data)
+      ee.emit(`${event}:start`, {
+        ...data,
+        event,
+      })
+
       return
     }
   })

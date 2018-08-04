@@ -6,7 +6,7 @@ const getForegroundApp = () => {
 }
 
 const getAppInfo = ({ app, name }) => {
-  const info = { name }
+  const info = { app: name }
   if (['Google Chrome','Google Chrome Canary','Chromium','Opera','Vivaldi'].includes(name)) {
     info.type = 'browser'
     info.activeTab = {

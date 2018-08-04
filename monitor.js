@@ -22,6 +22,7 @@ const createMonitor = (opts={}) => {
   opts = withDefaults(defaults.monitor)
 
   const { interval, idleThreshold } = opts
+  const logger = createLogger()
   const ee = createEmitter()
 
   timerMixin.mixin(ee)
@@ -31,7 +32,7 @@ const createMonitor = (opts={}) => {
     const now = Date.now()
     if (isIdle(idleThreshold)) {
       ee.emit(FOREGROUND_APP, {
-        name: 'idle',
+        app: '[idle]',
         type: 'system',
         _start: now,
       })
@@ -46,7 +47,7 @@ const createMonitor = (opts={}) => {
         _start: now,
       })
     } catch (err) {
-      logger.error(err.message)
+      logger.error(err.stack)
     }
   }
 
