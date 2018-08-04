@@ -1,5 +1,5 @@
 const createEmitter = require('./emitter')
-const timeoutMixin = require('./timeout-mixin')
+const timerMixin = require('./timer-mixin')
 const logger = require('./utils').logger()
 const {
   FOREGROUND_APP
@@ -17,7 +17,7 @@ const createMonitor = (opts={}) => {
   const defaultInterval = opts.interval || DEFAULT_INTERVAL
   const ee = createEmitter()
 
-  timeoutMixin.mixin(ee)
+  timerMixin.mixin(ee)
 
   // internal
   const checkForegroundApp = async () => {
