@@ -9,5 +9,8 @@
   "keywords": [],
   "author": "mvayngrib",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "eventemitter2": "^5.0.1",
+    "lodash": "^4.17.10"
+  }
 }

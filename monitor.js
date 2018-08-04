@@ -1,4 +1,4 @@
-const { EventEmitter } = require('events')
+const createEmitter = require('./emitter')
 const timeoutMixin = require('./timeout-mixin')
 const logger = require('./utils').logger()
 const {
@@ -15,7 +15,8 @@ const DEFAULT_INTERVAL = 1000
 
 const createMonitor = (opts={}) => {
   const defaultInterval = opts.interval || DEFAULT_INTERVAL
-  const ee = new EventEmitter()
+  const ee = createEmitter()
+
   timeoutMixin.mixin(ee)
 
   // internal

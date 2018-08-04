@@ -5,9 +5,12 @@ const {
 
 const monitor = require('./monitor')()
 monitor.monitorForegroundApp()
-monitor.on(FOREGROUND_APP, e => {
-  console.log(e)
+
+const changes = require('./filters').changes(monitor)
+changes.on('**', function (e) {
+  console.log(this.event, e)
 })
+
 
 // const { EventEmiter } = require('events')
 // const sys = require('systeminformation')
