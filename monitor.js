@@ -25,7 +25,7 @@ const createMonitor = (opts={}) => {
       const event = await getForegroundApp()
       ee.emit(FOREGROUND_APP, {
         ...event,
-        time: Date.now(),
+        _start: Date.now(),
       })
     } catch (err) {
       logger.error(err.message)

@@ -1,8 +1,10 @@
 const isEqual = require('lodash/isEqual')
+const omit = require('lodash/omit')
 const createEmitter = require('./emitter')
-const isNotEqual = (...args) => !isEqual(...args)
+const neuterEvent = event => omit(event, '_start')
+const defaultHasChanged = (a, b) => !isEqual(neuterEvent(a), neuterEvent(b))
 
-const changes = (monitor, hasChanged=isNotEqual) => {
+const changes = (monitor, hasChanged=defaultHasChanged) => {
   const ee = createEmitter()
   const byName = {}
   monitor.on('**', function (data) {
@@ -11,13 +13,15 @@ const changes = (monitor, hasChanged=isNotEqual) => {
     if (hasChanged(prev, data)) {
       byName[event] = data
       if (prev != null) {
-        ee.emit(`${event}:end`, prev)
+        ee.emit(`${event}:end`, {
+          ...prev,
+          _end: Date.now(),
+        })
       }
 
       ee.emit(`${event}:start`, data)
       return
     }
-
   })
 
   return ee

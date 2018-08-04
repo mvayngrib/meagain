@@ -1,2 +1,2 @@
 
-exports.FOREGROUND_APP = 'foreground:app'
+exports.FOREGROUND_APP = 'app'
