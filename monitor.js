@@ -1,9 +1,16 @@
+const withDefaults = require('lodash/defaults')
 const createEmitter = require('./emitter')
 const timerMixin = require('./timer-mixin')
-const logger = require('./utils').logger()
+const {
+  createLogger,
+  isIdle,
+} = require('./utils')
+
 const {
   FOREGROUND_APP
 } = require('./events')
+
+const defaults = require('./defaults')
 
 const {
   getForegroundApp,
@@ -11,21 +18,32 @@ const {
   getTabsForAllBrowsers,
 } = require('./jxa')
 
-const DEFAULT_INTERVAL = 1000
-
 const createMonitor = (opts={}) => {
-  const defaultInterval = opts.interval || DEFAULT_INTERVAL
+  opts = withDefaults(defaults.monitor)
+
+  const { interval, idleThreshold } = opts
   const ee = createEmitter()
 
   timerMixin.mixin(ee)
 
   // internal
   const checkForegroundApp = async () => {
+    const now = Date.now()
+    if (isIdle(idleThreshold)) {
+      ee.emit(FOREGROUND_APP, {
+        name: 'idle',
+        type: 'system',
+        _start: now,
+      })
+
+      return
+    }
+
     try {
       const event = await getForegroundApp()
       ee.emit(FOREGROUND_APP, {
         ...event,
-        _start: Date.now(),
+        _start: now,
       })
     } catch (err) {
       logger.error(err.message)
@@ -33,7 +51,7 @@ const createMonitor = (opts={}) => {
   }
 
   // external
-  ee.monitorForegroundApp = (interval=defaultInterval) => ee.setInterval(checkForegroundApp, interval)
+  ee.monitorForegroundApp = () => ee.setInterval(checkForegroundApp, interval)
   ee.stop = () => ee.clearTimers()
 
   return ee
