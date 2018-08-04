@@ -8,5 +8,9 @@ module.exports = async (scriptPath, arg='') => {
     arg
   ])
 
-  return JSON.parse(result)
+  if (result.length) {
+    return JSON.parse(result)
+  }
+
+  return {}
 }

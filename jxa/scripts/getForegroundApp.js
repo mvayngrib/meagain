@@ -1,3 +1,10 @@
+const getForegroundApp = () => {
+  const name = Application('System Events').applicationProcesses.where({ frontmost: true }).name()[0]
+  const app = Application(name)
+  app.includeStandardAdditions = true
+  return { name, app }
+}
+
 const getAppInfo = ({ app, name }) => {
   const info = { name }
   if (['Google Chrome','Google Chrome Canary','Chromium','Opera','Vivaldi'].includes(name)) {
@@ -25,12 +32,6 @@ const getAppInfo = ({ app, name }) => {
   }
 
   return info
-}
-
-const getForegroundApp = () => {
-  const name = Application('System Events').applicationProcesses.where({ frontmost: true }).name()[0]
-  const app = Application(name)
-  return { name, app }
 }
 
 JSON.stringify(getAppInfo(getForegroundApp()))
