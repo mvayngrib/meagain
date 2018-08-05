@@ -1,6 +1,6 @@
 {
   "name": "meagain",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "track activity on your computer, optionally save to your AWS account (an S3 bucket you control)",
   "main": "index.js",
   "bin": "cmd.js",
