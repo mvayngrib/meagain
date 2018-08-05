@@ -1,9 +1,9 @@
 const fs = require('fs')
 const os = require('os')
-const path = require('path')
 const yargs = require('yargs')
 const withDefaults = require('lodash/defaults')
-const { APP_NAME } = require('../constants')
+const { APP_NAME, CONF_PATH } = require('../constants')
+const APP_NAME_LOWER = APP_NAME.toLowerCase()
 const system = require('../system')[os.platform()]
 if (!system) {
   throw new Error('only OSX is currently supported')
@@ -15,31 +15,27 @@ const defaults = withDefaults({
   ...require('../defaults'),
 })
 
-const withResolvedConf = ({ confPath=defaults.confPath, ...rest }) => {
-  confPath = path.resolve(process.cwd(), confPath)
-  if (!fs.existsSync(confPath)) {
-    confPath = path.resolve(__dirname, `../${confPath}`)
-  }
+const withConf = (argv) => {
+  if (!fs.existsSync(CONF_PATH)) {
+    throw new Error(`expected conf file at: ${CONF_PATH}
 
-  if (!fs.existsSync(confPath)) {
-    throw new Error(`expected conf file at: ${confPath}`)
+please run: ${APP_NAME_LOWER} conf`)
   }
 
   let conf
   try {
-    conf = require(confPath)
+    conf = require(CONF_PATH)
   } catch (err) {
-    throw new Error(`invalid conf at path: ${confPath}`)
+    throw new Error(`invalid conf at path: ${CONF_PATH}`)
   }
 
   return {
-    confPath,
+    ...argv,
     conf,
-    ...rest,
   }
 }
 
-const track = (argv={}) => require('./track')(withResolvedConf({
+const track = (argv={}) => require('./track')(withConf({
   ...argv,
   system,
   silent: defaults.silent
@@ -48,22 +44,27 @@ const track = (argv={}) => require('./track')(withResolvedConf({
 const result = yargs
   // optional so that it can be passed via env var
   .command({
-    command: 'track [confPath]',
-    desc: 'start tracking',
+    command: ['start', 'track'],
+    desc: 'start tracking your activity',
     handler: track
   })
   .command({
-    command: 'service <command> [confPath]',
+    command: 'service <command>',
     desc: `install/uninstall/start/stop ${APP_NAME} background service:
 
-trackme service install ./path/to/conf.json
-trackme service uninstall
-trackme service start
-trackme service stop
+${APP_NAME_LOWER} service install
+${APP_NAME_LOWER} service uninstall
+${APP_NAME_LOWER} service start
+${APP_NAME_LOWER} service stop
 
 you might need sudo
 `,
-    handler: argv => require('./service')(withResolvedConf(argv)),
+    handler: argv => require('./service')(withConf(argv)),
+  })
+  .command({
+    command: 'conf',
+    desc: 'configure meagain',
+    handler: () => require('./conf')()
   })
   .argv
 

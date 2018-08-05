@@ -4,7 +4,7 @@ const { APP_NAME } = require('../constants')
 const { createLogger, getHomedir } = require('../utils')
 const logger = createLogger()
 
-module.exports = ({ confPath, command }) => {
+module.exports = ({ command }) => {
   const execCommand = command => {
     if (command === 'install') {
       svc.install()
@@ -39,10 +39,6 @@ module.exports = ({ confPath, command }) => {
     description: 'track usage Mac activity for personal development',
     script: `${basePath}`,
     env: [
-      {
-        name: 'CONF_PATH',
-        value: confPath,
-      },
       {
         name: 'HOME',
         value: getHomedir(),

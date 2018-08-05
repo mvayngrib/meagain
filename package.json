@@ -1,7 +1,7 @@
 {
-  "name": "monitor",
+  "name": "meagain",
   "version": "1.0.0",
-  "description": "",
+  "description": "track activity on your computer, optionally save to your AWS account (an S3 bucket you control)",
   "main": "index.js",
   "bin": "cmd.js",
   "scripts": {
@@ -15,8 +15,10 @@
     "@paulcbetts/system-idle-time": "^1.0.4",
     "changes-feed": "^1.1.0",
     "eventemitter2": "^5.0.1",
+    "inquirer": "^6.0.0",
     "lodash": "^4.17.10",
     "log-update": "^2.3.0",
+    "mkdirp": "^0.5.1",
     "node-mac": "^0.1.8",
     "screenshot-desktop": "^1.4.3",
     "yargs": "^12.0.1",

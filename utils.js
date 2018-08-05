@@ -108,9 +108,8 @@ const humanizeTime = time => Object.keys(unitToMillis).reduce((str, unit) => {
   return str.length ? `${str}, ${added}` : added
 }, '')
 
-const parseEnvVars = ({ CONF_PATH, SILENT }) => ({
+const parseEnvVars = ({ SILENT }) => ({
   silent: yn(SILENT),
-  confPath: CONF_PATH,
 })
 
 const getHomedir = () => process.env.HOME || os.homedir()

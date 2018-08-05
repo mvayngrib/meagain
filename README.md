@@ -1,26 +1,26 @@
-# trackme
+# meagain
 
-track your activity on OSX, optionally save to your AWS account (an S3 bucket you control)
+track activity on your computer, optionally save to your AWS account (an S3 bucket you control)
 
-## What's the point?
+## Why?
 
-To analyze your life, you need data. You don't have it, and if you do, you don't own it. Apps like RescueTime store your data in their cloud. Apps like Timing store data locally...but what if they don't really?
+To analyze your life, you need data. You don't have it, and if you do, you don't own it. Apps like RescueTime store your data in their cloud. Apps like Timing store data locally...but what if they don't really? I mean I'm sure they do...but what if they don't?
 
-## What does it track?
+## What?
 
-The foreground application and system idle time
+currently tracked: foreground application and system idle time
 
 ## Usage
 
 ### Command Line
 
 ```sh
-npm i -g trackme
+npm i -g meagain
 ```
 
 ### Module
 
-See [cmd.js](./cmd.js)
+See [cli/track.js](./cli/track.js) for an example of how to set up tracking
 
 ### Todo
 

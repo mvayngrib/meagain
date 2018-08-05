@@ -1,10 +1,9 @@
-const path = require('path')
 const withDefaults = require('lodash/defaults')
 const AWS = require('aws-sdk')
 const defaults = require('../defaults')
+const createS3Client = require('../s3-client')
 const { trackMe } = require('../')
 const createMonitor = require('../monitor')
-const { getHomedir } = require('../utils')
 
 const createS3Store = conf => {
   const {
@@ -18,14 +17,8 @@ const createS3Store = conf => {
   }
 
   const createS3Store = require('../store/s3')
-  const credentials = new AWS.SharedIniFileCredentials({
-    profile,
-    filename: path.resolve(getHomedir(), '.aws/credentials'),
-  })
-
-  AWS.config.credentials = credentials
   return createS3Store({
-    client: new AWS.S3(),
+    client: createS3Client(profile),
     ...storeOpts,
   })
 }
