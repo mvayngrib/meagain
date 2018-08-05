@@ -17,10 +17,11 @@
   "license": "MIT",
   "dependencies": {
     "@paulcbetts/system-idle-time": "^1.0.4",
-    "changes-feed": "^1.1.0",
+    "changes-feed": "github:mvayngrib/changes-feed",
     "cli-table": "^0.3.1",
     "eventemitter2": "^5.0.1",
     "inquirer": "^6.0.0",
+    "level": "^4.0.0",
     "lodash": "^4.17.10",
     "log-update": "^2.3.0",
     "mkdirp": "^0.5.1",
