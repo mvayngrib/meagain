@@ -1,6 +1,7 @@
 const os = require('os')
 const crypto = require('crypto')
 const yn = require('yn')
+const Table = require('cli-table')
 
 const prettify = obj => obj ? JSON.stringify(obj, null, 2) : ''
 const prettifyArgs = args => args.length === 1 ? prettify(args[0]) : prettify(args)
@@ -75,17 +76,16 @@ const getEventKey = event => {
   return `${getTimePrefix(_start)}/${eventName}`
 }
 
-const prettifySummary = summary => {
-  let text = ''
-  for (let app in summary) {
-    let { time } = summary[app]
-    let humanTime = humanizeTime(time)
-    if (humanTime) {
-      text += `${app}: ${humanTime}\n`
-    }
-  }
+const getAppRow = ({ app, percent, time }) => [app, percent, humanizeTime(time)]
 
-  return text
+const prettifySummary = summary => {
+  const table = new Table({
+    head: ['Application', '%', 'time'],
+    colWidths: [30, 20, 20],
+  })
+
+  table.push(...summary.map(getAppRow))
+  return table.toString()
 }
 
 const unitToMillis = {

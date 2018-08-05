@@ -1,4 +1,5 @@
 const cloneDeep = require('lodash/cloneDeep')
+const map = require('lodash/map')
 
 const createAggregate = () => ({
   time: 0
@@ -24,18 +25,36 @@ const trackTimePerApp = changes => {
 
   changes.on('**:end', data => addEvent(aggregates, data))
 
-  tracker.summary = () => {
-    const dump = cloneDeep(aggregates)
+  const toAggArray = aggregates => map(aggregates, (agg, app) => ({
+    ...agg,
+    app,
+  }))
+
+  const summarize = aggregates => {
+    const byApp = cloneDeep(aggregates)
     const current = changes.getCurrentEvent()
     if (current) {
-      addEvent(dump, current)
+      addEvent(byApp, current)
     }
 
-    return dump
+    const summary = toAggArray(byApp)
+    return withPercents(summary)
+      .sort(timeDesc)
   }
 
+  const withPercents = aggregates => {
+    const total = aggregates.reduce((total, { time }) => total + time, 0)
+    return aggregates.map(agg => ({
+      ...agg,
+      percent: (100 * agg.time / total).toFixed(1)
+    }))
+  }
+
+  tracker.summary = () => summarize(aggregates)
   return tracker
 }
+
+const timeDesc = (a, b) => b.time - a.time
 
 module.exports = {
   trackTimePerApp
