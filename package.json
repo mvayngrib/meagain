@@ -4,6 +4,10 @@
   "description": "track activity on your computer, optionally save to your AWS account (an S3 bucket you control)",
   "main": "index.js",
   "bin": "cmd.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mvayngrib/meagain"
+  },
   "scripts": {
     "lint": "eslint --ignore-path .gitignore --ignore .",
     "precommit": "npm run lint"
