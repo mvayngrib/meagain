@@ -40,8 +40,8 @@ module.exports = async () => {
       name: 'bucket',
       message: 'Select your S3 bucket',
       when: ({ storeInS3 }) => storeInS3,
-      choices: async () => {
-        const client = createS3Client()
+      choices: async ({ awsProfile }) => {
+        const client = createS3Client(awsProfile)
         const { Buckets } = await client.listBuckets().promise()
         return Buckets.map(({ Name }) => Name)
       }
