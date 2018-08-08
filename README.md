@@ -81,6 +81,10 @@ npm i -g meagain
 ### Command Line
 
 ```sh
+# configure your storage options
+meagain configure
+
+# start tracking your activity
 meagain start
 ```
 
