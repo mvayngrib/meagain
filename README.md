@@ -11,7 +11,9 @@
   - [Usage](#usage)
     - [Command Line](#command-line)
     - [Use as a Module](#use-as-a-module)
-    - [Todo](#todo)
+  - [Todo](#todo)
+    - [Soon](#soon)
+    - [Eventually](#eventually)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -92,7 +94,9 @@ meagain start
 
 See [lib/cli/track.js](./lib/cli/track.js) for an example of how to set up tracking
 
-### Todo
+## Todo
+
+### Soon
 
 - implement web app (ignore the mess in `app/` for now)
 - support data queries
@@ -100,3 +104,9 @@ See [lib/cli/track.js](./lib/cli/track.js) for an example of how to set up track
   - search content of visited browser pages (later)
 - improve run-as-a-service mode: 
   - enable start on system start
+
+### Eventually
+
+- deploy as serverless
+  - serve web app from s3 bucket
+  - do all processing in lambda
