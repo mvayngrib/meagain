@@ -45,7 +45,7 @@
     "encoding-down": "^5.0.4",
     "eslint": "^5.3.0",
     "husky": "^0.14.3",
-    "lint-staged": "^7.2.0",
+    "lint-staged": "7.1.2",
     "memdown": "^3.0.0",
     "standard-version": "^4.4.0",
     "tape": "^4.9.1"
