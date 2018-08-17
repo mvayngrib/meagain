@@ -13,6 +13,7 @@
     "precommit": "lint-staged",
     "prepublish": "npm run lint",
     "build": "babel lib/ui --out-dir dist --copy-files",
+    "preversion": "npm run lint",
     "version": "standard-version"
   },
   "keywords": [],
