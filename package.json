@@ -12,7 +12,8 @@
     "lint": "eslint --ignore-path .gitignore --quiet .",
     "precommit": "lint-staged",
     "prepublish": "npm run lint",
-    "build": "babel lib/ui --out-dir dist --copy-files"
+    "build": "babel lib/ui --out-dir dist --copy-files",
+    "version": "standard-version"
   },
   "keywords": [],
   "author": "mvayngrib",
