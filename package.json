@@ -22,7 +22,6 @@
     "@paulcbetts/system-idle-time": "^1.0.4",
     "bluebird": "^3.5.1",
     "changes-feed": "github:mvayngrib/changes-feed",
-    "chromatism": "^3.0.0",
     "cli-table": "^0.3.1",
     "eventemitter2": "^5.0.1",
     "inquirer": "^6.0.0",
