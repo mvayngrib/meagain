@@ -58,5 +58,9 @@
       "doctoc",
       "git add"
     ]
-  }
+  },
+  "engines" : {
+    "node" : ">=8"
+  },
+  "os" : [ "darwin" ]
 }
