@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/mvayngrib/meagain/compare/v1.1.0...v1.2.0) (2018-09-09)
+
+
+### Bug Fixes
+
+* messages ([9402a32](https://github.com/mvayngrib/meagain/commit/9402a32))
+* specify os and nodejs version limitations in package.json ([fe1f606](https://github.com/mvayngrib/meagain/commit/fe1f606))
+
+
+### Features
+
+* add update-notifier ([48944b8](https://github.com/mvayngrib/meagain/commit/48944b8))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/mvayngrib/meagain/compare/v1.0.2...v1.1.0) (2018-08-17)
 
