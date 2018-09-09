@@ -75,6 +75,7 @@ currently tracked:
 ## Install
 
 ```sh
+# you may need sudo
 npm i -g meagain
 ```
 
@@ -88,6 +89,12 @@ meagain configure
 
 # start tracking your activity
 meagain start
+
+# or, run as a service
+meagain service install
+# see logs at
+# ~/Library/Logs/MeAgain/meagain.log
+# ~/Library/Logs/MeAgain/meagain_error.log
 ```
 
 ### Use as a Module
@@ -98,7 +105,8 @@ See [lib/cli/track.js](./lib/cli/track.js) for an example of how to set up track
 
 ### Soon
 
-- implement web app (ignore the mess in `app/` for now)
+- wrap as electron app? (or maybe Chrome app)
+- or, implement web app (ignore the mess in `app/` for now)
 - support data queries
   - get activity breakdown during a time period (today, this month)
   - search content of visited browser pages (later)
