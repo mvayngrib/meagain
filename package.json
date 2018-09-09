@@ -14,7 +14,8 @@
     "prepublish": "npm run lint",
     "build": "babel lib/ui --out-dir dist --copy-files",
     "preversion": "npm run lint",
-    "version": "standard-version"
+    "version": "standard-version",
+    "start": "node lib/cli/index.js start"
   },
   "keywords": [],
   "author": "mvayngrib",
@@ -59,8 +60,10 @@
       "git add"
     ]
   },
-  "engines" : {
-    "node" : ">=8"
+  "engines": {
+    "node": ">=8"
   },
-  "os" : [ "darwin" ]
+  "os": [
+    "darwin"
+  ]
 }
